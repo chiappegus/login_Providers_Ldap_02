@@ -22,7 +22,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/admins")
+     * @Route("/usuarios")
      */
     public function admin()
     {

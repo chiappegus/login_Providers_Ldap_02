@@ -17,7 +17,7 @@ class LoginController extends Controller
 {
 
     /**
-     * @Route("/login" , name="login")
+     * @Route("/usuarios/login" , name="login")
      */
     public function loginAction(Request $request, AuthenticationUtils $authenticationutils)
     {  
@@ -62,7 +62,7 @@ class LoginController extends Controller
 
            
 //OU=Magyp Usuarios
-        $query = $ldap->query('OU=Magyp Usuarios,dc=MAGYP,dc=AR', '(&(objectclass=user)(samaccountname=gchiappe))');
+        $query = $ldap->query('OU=Magyp Usuarios,dc=MAGYP,dc=AR', '(&(objectclass=user)(samaccountname=mestrada))');
         $results = $query->execute()->toArray();
         dump($results);
 

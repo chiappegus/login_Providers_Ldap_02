@@ -263,9 +263,9 @@ security:
                 base_dn: 'ou=Magyp Usuarios, dc=magyp, dc=ar'
                 search_dn: 'CN=Gustavo Chiappe,OU=Staff-DirNacionalDeMatriculacionYFiscalizacion,OU=Dir Nacional de Matriculacion y Fiscalizacion,OU=Secretaria de Agricultura ganaderia y pesca,OU=Magyp Usuarios,DC=magyp,DC=ar'
                 search_dn: '(sAMAccountName={username})' 
-                search_password: 'xxxxxx'
+                search_password: 'XXXXXXXXX'
 
-                #default_roles: ROLE_USER
+                default_roles: ROLE_USER
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -289,13 +289,13 @@ security:
 
         admin:
             anonymous: true
-            pattern:   login
+            pattern:   ^/usuarios
             form_login_ldap:
                 provider: my_ldap
                 service: Symfony\Component\Ldap\Ldap
                 dn_string: 'MAGYP\{username}'
-                check_path: login
-                login_path: login
+                check_path: /usuarios/login
+                login_path: /usuarios/login
             logout:
                 path: logout
                 target: login
@@ -305,4 +305,8 @@ security:
       #- { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
       - { path: ^/user_agent, roles: ROLE_USER }
       - { path: ^/admins, roles: ROLE_USER }
+
+      - { path: ^/usuarios/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+      # - { path: ^/gus, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+      - { path: ^/usuarios, roles: IS_AUTHENTICATED_FULLY }
 
