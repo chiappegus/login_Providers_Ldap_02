@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{#   
+<!-- composer require dev doctrine/doctrine-fixtures-bundle 
+tambien agregar en el Appkernel.php central  
+new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+
+
+despues crear la carpeta DataFitures/ORM/LoadUserData.php
+
+y despues con la consola de vuelta :
+php bin/console doctrine:fixtures:load
+
+
+error :
+
+mkdir var/data
+touch var/data/data.sql
+php bin/console doctrine:schema:update --force
+
+y luego :(ahi deberia funcionar)
+php bin/console doctrine:fixtures:load
+
+https://symfony.com/doc/master/bundles/DoctrineFixturesBundle/index.html
+
+ver el LDAP
+https://www.codeproject.com/Articles/1205072/Symfony-LDAP-Component-AD-Authentication
+
+
+ver lo ultimo que cambia si te logeas por usermane o email , se deben modificar varios
+campos tanbien  eleminar de security property: username
+
+https://www.youtube.com/watch?v=3xhYwwznIWU&t=12s
+
+me parece que la confiracion :
+ database_name: pruebas_login
+ me genero una carpeta pruebas que ya la tenia y me agrego una tabla puebaslogin ??
+
+
+
+1 : php bin/console doctrine:schema:update --force // escribe el base de datos!! 
+
+
+2: php bin/console doctrine:fixtures:load   // hace correr los datos primero los purga y luego escribe.
+
+
+
+
+ -->
+ #}
+
+
+{% block body %}
+<div class="panel panel-sucess">
+	<div class="panel-heading">
+		<h3>Login</h3>
+	</div>
+
+	<div class="panel-body">
+            <div class="alert alert-danger">
+                	<h3> 'Espermos que regreses Pronto'</h3>
+                </div>
+            {% if errors %}
+                <div class="alert alert-danger">
+                	{{errors.messageKey}}
+
+                </div>
+
+                <div  class="alert alert-danger">{{ errors.messageKey|trans(errors.messageData, 'security') }}</div>
+            {% endif %}
+		<form action="{{path('login')}}" method="post">
+			<div class="form-group">
+			<label for="username">UserName</label>
+			<input type="text" name="_username" id="username" class="form-group">	
+			</div>
+			<div class="form-group">
+			<label for="password">Password</label>
+			<input type="password" name="_password" id="password" class="form-group">
+			</div>
+			<button class="btn btn-info pull-right">Connect</button>
+			 <input type="hidden" name="_target_path" value="/login" />
+
+		</form>
+	</div>
+
+</div>
+{% endblock %}

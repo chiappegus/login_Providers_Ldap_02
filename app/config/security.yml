@@ -1,0 +1,308 @@
+
+# # To get started with security, check out the documentation:
+# # https://symfony.com/doc/current/security.html
+# security:
+
+#     encoders:
+#         AppBundle\Entity\User:
+#             algorithm: bcrypt
+#         Symfony\Component\Security\Core\User\User:
+#             algorithm: bcrypt   
+
+#     # https://www.codeproject.com/Articles/1205072/Symfony-LDAP-Component-AD-Authentication
+#     # https://symfony.com/doc/current/security/ldap.html
+#     providers:
+
+#         chain_provider:
+#             chain:
+#                 providers: [in_memory, db_provider, my_ldap_users]
+
+#         db_provider:
+#                     entity:
+#                         class: AppBundle:User
+#                         property: username
+
+
+#         my_ldap_users:
+#             ldap:
+#                 service: Symfony\Component\Ldap\Ldap
+#                 base_dn: dc=ldap,dc=com
+#                 #search_dn: '(sAMAccountName={username})'
+#                 search_dn: 'cn=admin,dc=ldap,dc=com'
+#                 search_password: '182625'
+#                 #default_roles: ROLE_USER
+#                 uid_key: uid
+
+#         in_memory:
+#             memory:
+#                 users:
+
+#                     # php bin/console security:encode-password
+#                     ryan:
+#                         password: $2y$13$WSDdkOhxcCYhILc/G.HlBOmHtHfXWJ059HwJWPJ9FuYjzTcNVsIzu
+#                         roles: 'ROLE_USER'
+#                     admins:
+#                         password: $2y$13$WSDdkOhxcCYhILc/G.HlBOmHtHfXWJ059HwJWPJ9FuYjzTcNVsIzu
+#                         roles: 'ROLE_ADMIN'
+#                     pepe:
+#                         password: $2y$13$MZjGrgEHjDVtR21HKlmPMO4.XMW7tNF6xwIyoFCwHUR/2VhSdSfGW
+#                         roles: 'ROLE_SUPER_ADMIN'            
+
+        
+
+#     firewalls:
+#         # disables authentication for assets and the profiler, adapt it according to your needs
+#         dev:
+#             pattern: ^/(_(profiler|wdt)|css|images|js)/
+#             security: false
+
+#         main:
+
+#             #https://symfony.com/doc/current/security/ldap.html
+#             #The LDAP PHP extension is not enabled.
+#             form_login_ldap:
+#             #http_basic_ldap: uid=%u,dc=ldap,dc=com
+#                 login_path: login
+#                 check_path: login
+#                 service: Symfony\Component\Ldap\Ldap
+#                 dn_string: 'uid={username},dc=ldap,dc=com'
+#                 #dn_string: 'MAGYP\{username}'
+#             logout:
+#                 path: /logout
+#                 target: /santi    
+#             # activate different ways to authenticate
+
+#             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+#             # http_basic: ~
+
+#             # https://symfony.com/doc/current/security/form_login_setup.html
+#             #form_login: ~
+
+#             #https://symfony.com/doc/current/security/form_login.html
+#             #http://www.rephp.com/configuracion-y-configuracion-del-componente-ldap-symfony3.html
+
+
+#             #http://www.4answered.com/questions/view/23ba4de/Symfony3-LDAP-configuration
+            
+#             anonymous: ~
+#             form_login:
+#                 login_path: login
+#                 check_path: login
+
+#                 default_target_path: login
+#                 always_use_default_target_path: true
+
+                
+#             logout:
+#                 path: /logout
+#                 target: /santi    
+
+        
+
+#         secured_area:
+#             # ...
+#             pattern: ^/
+#             provider: db_provider
+#             anonymous: ~
+#             http_basic:
+#                 provider: in_memory
+#             provider: my_ldap_users    
+                      
+
+
+    
+#     access_control:
+#         - {path: ^/^ , roles: IS_AUTHENTICATED_ANONYMOUSLY }
+#         - {path: ^/login , roles: [IS_AUTHENTICATED_ANONYMOUSLY ,IS_AUTHENTICATED_FULLY] }
+#         - {path: ^/Admin , roles: IS_AUTHENTICATED_FULLY  }
+#         - { path: ^/tiosand, roles: ROLE_ADMIN }
+#         - { path: ^/admins, roles:   [ ROLE_ADMIN , IS_AUTHENTICATED_FULLY]}
+
+# To get started with security, check out the documentation:
+# https://symfony.com/doc/current/security.html
+# security:
+
+#     encoders:
+#         AppBundle\Entity\User:
+#             algorithm: bcrypt
+#         Symfony\Component\Security\Core\User\User:
+#             algorithm: bcrypt   
+
+    # https://www.codeproject.com/Articles/1205072/Symfony-LDAP-Component-AD-Authentication
+    # https://symfony.com/doc/current/security/ldap.html
+    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+    # providers:
+
+        # chain_provider:
+        #     chain:
+        #         providers: [in_memory, db_provider, my_ldap_users]
+
+        # db_provider:
+        #             entity:
+        #                 class: AppBundle:User
+        #                 property: username
+
+
+        # my_ldap_users:
+        #     ldap:
+        #         service: Symfony\Component\Ldap\Ldap
+        #         base_dn: 'ou=Magyp Usuarios, dc=MAGYP, dc=AR'
+        #         search_dn: 'username'
+        #         #search_dn:  "cn=read-only-admin,dc=MAGYP,dc=AR"
+        #         search_password: password
+        #         # default_roles: ROLE_USER
+        #         # uid_key: 'uid'  
+        #         #filter: '(&({uid_key}={username})(objectclass=person)(ou=Users))'
+
+        # in_memory:
+        #     memory:
+        #         users:
+
+        #             # php bin/console security:encode-password
+        #             ryan:
+        #                 password: $2y$13$WSDdkOhxcCYhILc/G.HlBOmHtHfXWJ059HwJWPJ9FuYjzTcNVsIzu
+        #                 roles: 'ROLE_USER'
+        #             admins:
+        #                 password: $2y$13$WSDdkOhxcCYhILc/G.HlBOmHtHfXWJ059HwJWPJ9FuYjzTcNVsIzu
+        #                 roles: 'ROLE_ADMIN'
+        #             pepe:
+        #                 password: $2y$13$MZjGrgEHjDVtR21HKlmPMO4.XMW7tNF6xwIyoFCwHUR/2VhSdSfGW
+        #                 roles: 'ROLE_SUPER_ADMIN'            
+
+        
+
+    # firewalls:
+    #     # disables authentication for assets and the profiler, adapt it according to your needs
+    #     dev:
+    #         pattern: ^/(_(profiler|wdt)|css|images|js)/
+    #         security: false
+
+    #     main:
+
+    #         #https://symfony.com/doc/current/security/ldap.html
+    #         #The LDAP PHP extension is not enabled.
+    #         anonymous: ~
+    #         form_login_ldap:
+    #         #http_basic_ldap:
+    #             login_path: login
+    #             check_path: login
+#     #             default_target_path: login
+#     #             always_use_default_target_path: true
+#     #             service: Symfony\Component\Ldap\Ldap
+#     #             #dn_string: 'uid={username},dc=MAGYP,dc=AR'
+#     #             dn_string: 'MAGYP\{username}'
+#     #         logout:
+#     #             path: /logout
+#     #             target: /santi    
+#             # activate different ways to authenticate
+
+
+# # acaca
+
+# security:
+#     # ...
+
+#     encoders:
+#         Symfony\Component\Security\Core\User\User:
+#             algorithm: bcrypt 
+
+#     providers:
+#         my_ldap:
+#             ldap:
+#                 service: Symfony\Component\Ldap\Ldap
+#                 base_dn: dc=gustavo,dc=com
+#                 search_dn: cn=admin,ou=Group,dc=gustavo,dc=com
+#                 search_password: 182625
+#                 default_roles: ROLE_USER
+#                 uid_key: uid
+
+#     firewalls:
+
+# <<<<<<< HEAD
+
+           
+#         main:
+#             provider: my_ldap
+#             pattern: /login
+#             # ...
+#             anonymous: ~
+#             form_login_ldap:
+#                 login_path: login
+#                 check_path: login
+#                 default_target_path: login
+#                 always_use_default_target_path: true  
+#                 service: Symfony\Component\Ldap\Ldap
+#                 dn_string: 'uid={username}'
+#             logout:
+#                 path: logout_out  
+#                 target: /login   
+        
+
+#     access_control:
+#         #- {path: ^/^ , roles: IS_AUTHENTICATED_ANONYMOUSLY }
+#         - {path: ^/login , roles: [IS_AUTHENTICATED_ANONYMOUSLY ] }
+         
+
+#             #http://www.4answered.com/questions/view/23ba4de/Symfony3-LDAP-configuration
+   
+                      
+
+
+    
+    # access_control:
+    #     - {path: ^/^ , roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    #     - {path: ^/login , roles: [IS_AUTHENTICATED_ANONYMOUSLY ,IS_AUTHENTICATED_FULLY] }
+    #     - {path: ^/Admin , roles: IS_AUTHENTICATED_FULLY  }
+    #     - { path: ^/tiosand, roles: ROLE_ADMIN }
+    #     - { path: ^/admins, roles:   [ ROLE_ADMIN , IS_AUTHENTICATED_FULLY]}
+security:
+    providers:
+        my_ldap:
+            ldap:
+                service: Symfony\Component\Ldap\Ldap
+                base_dn: 'ou=Magyp Usuarios, dc=magyp, dc=ar'
+                search_dn: 'CN=Gustavo Chiappe,OU=Staff-DirNacionalDeMatriculacionYFiscalizacion,OU=Dir Nacional de Matriculacion y Fiscalizacion,OU=Secretaria de Agricultura ganaderia y pesca,OU=Magyp Usuarios,DC=magyp,DC=ar'
+                search_dn: '(sAMAccountName={username})' 
+                search_password: 'xxxxxx'
+
+                #default_roles: ROLE_USER
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        # main:
+           
+        #     anonymous: ~
+            
+        #     form_login_ldap:
+        #     #http_basic_ldap:
+        #         login_path: login
+        #         check_path: login
+        #         service: Symfony\Component\Ldap\Ldap
+        #         dn_string: 'MAGYP\{username}'
+        #     logout:
+        #          path: logout  
+        #          target: /login
+
+        admin:
+            anonymous: true
+            pattern:   login
+            form_login_ldap:
+                provider: my_ldap
+                service: Symfony\Component\Ldap\Ldap
+                dn_string: 'MAGYP\{username}'
+                check_path: login
+                login_path: login
+            logout:
+                path: logout
+                target: login
+
+    access_control:
+      - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+      #- { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+      - { path: ^/user_agent, roles: ROLE_USER }
+      - { path: ^/admins, roles: ROLE_USER }
+

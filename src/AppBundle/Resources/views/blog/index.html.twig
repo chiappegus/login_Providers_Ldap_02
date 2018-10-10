@@ -1,0 +1,12 @@
+{# app/Resources/views/blog/index.html.twig #}
+
+
+{% extends "@App/layout.html.twig" %}
+
+{% block content %}
+	<p>aca esta en la base???</p>
+    {% for entry in blog_entries %}
+        <h2>{{ entry.title }}</h2>
+        <p>{{ entry.body }}</p>
+    {% endfor %}
+{% endblock %}
