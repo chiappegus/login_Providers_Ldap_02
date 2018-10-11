@@ -261,9 +261,9 @@ security:
             ldap:
                 service: Symfony\Component\Ldap\Ldap
                 base_dn: 'ou=Magyp Usuarios, dc=magyp, dc=ar'
-                search_dn: 'CN=Gustavo Chiappe,OU=Staff-DirNacionalDeMatriculacionYFiscalizacion,OU=Dir Nacional de Matriculacion y Fiscalizacion,OU=Secretaria de Agricultura ganaderia y pesca,OU=Magyp Usuarios,DC=magyp,DC=ar'
+                search_dn: 'CN=Xvvvv Cnnnnn,OU=Staff-DirNacionalDeMatriculacionYFiscalizacion,OU=Dir Nacional de Matriculacion y Fiscalizacion,OU=Secretaria de Agricultura ganaderia y pesca,OU=Magyp Usuarios,DC=magyp,DC=ar'
                 search_dn: '(sAMAccountName={username})' 
-                search_password: 'XXXXXXXXX'
+                search_password: 'XXXXXX'
 
                 default_roles: ROLE_USER
 
@@ -296,9 +296,11 @@ security:
                 dn_string: 'MAGYP\{username}'
                 check_path: /usuarios/login
                 login_path: /usuarios/login
+                default_target_path: /usuarios
+
             logout:
-                path: logout
-                target: login
+                path: /usuarios/logout
+                target: /usuarios/login
 
     access_control:
       - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }

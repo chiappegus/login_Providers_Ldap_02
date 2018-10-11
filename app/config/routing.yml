@@ -2,5 +2,5 @@ app:
     resource: '@AppBundle/Controller/'
     type: annotation
 
-logout_out:
-    path: /logout    
+logout:
+    path: /usuarios/logout   
